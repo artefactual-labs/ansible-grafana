@@ -210,6 +210,9 @@ grafana_dashboards: []
 
 grafana_dashboards_dir: "dashboards"
 
+# Allow to write on dashboards imported from json files
+grafana_dashboards_dir_allow_ui_upgrades: true
+
 # Alert notification channels to configure
 grafana_alert_notifications: []
 #  - name: "Email Alert"
