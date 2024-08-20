@@ -150,7 +150,8 @@ grafana_smtp: {}
 #  password:
 #  from_address:
 
-# Enable grafana alerting mechanism
+# Enable grafana alerting mechanism (unified_alerting since grafana 11)
+# See: https://grafana.com/docs/grafana/v10.4/alerting/set-up/migrating-alerts/
 grafana_alerting:
   execute_alerts: true
 #  error_or_timeout: 'alerting'

@@ -104,6 +104,8 @@ versions_to_keep = 20
 enabled = true
 path = {{ grafana_data_dir }}/dashboards
 
+# Use legacy alerting or unified_alerting based on grafana version
+{% if grafana_version is version_compare('11.0.0', '<') %}
 # Alerting
 [alerting]
 {% if grafana_alerting != {} %}
@@ -115,6 +117,26 @@ enabled = true
 {%   endfor %}
 {% else %}
 enabled = false
+{% endif %}
+
+{% else %}
+# Alerting (Disable legacy alert)
+[alerting]
+enabled = false
+
+# Unified Alerting
+{% if grafana_alerting != {} %}
+[unified_alerting]
+enabled = true
+{%   for k,v in grafana_alerting.items() %}
+{%     if k != 'enabled' %}
+{{ k }} = {{ v }}
+{%     endif %}
+{%   endfor %}
+{% else %}
+[unified_alerting]
+enabled = false
+{% endif %}
 {% endif %}
 
 # SMTP and email config
